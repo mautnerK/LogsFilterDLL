@@ -18,20 +18,20 @@ namespace LogsFilterDLL
 
             foreach (string line in lines)
             {
-                if (type != "" && type != null)
+                if (!String.IsNullOrEmpty(type))
                 {
                     startLocation = line.IndexOf("[", StringComparison.Ordinal);
                     endLocation = line.IndexOf("]", StringComparison.Ordinal);
                     if (filterLog(line, startLocation, endLocation, type.ToUpper()) != null) filteredList.Add(line);
                 }
-                if (vault != "" && vault != null)
+                if (!String.IsNullOrEmpty(vault))
                 {
                     startLocation = line.IndexOf("{", StringComparison.Ordinal);
                     endLocation = line.IndexOf("}", StringComparison.Ordinal);
                     if (type != "") filterSublist(filteredList, line, startLocation, endLocation, vault);
                     else if (type == "" && filterLog(line, startLocation, endLocation, vault.ToUpper()) != null) filteredList.Add(line);
                 }
-                if (modul != "" && modul != null)
+                if (!String.IsNullOrEmpty(modul))
                 {
                     startLocation = line.IndexOf("[", line.IndexOf("[") + 1);
                     endLocation = line.IndexOf("]", line.IndexOf("]") + 1);
